@@ -1,16 +1,5 @@
-//Squares
-//const content = document.getElementById('content');
-
-//Auxiliar
-let selectedBtn = "square";
-
-//var difficult = 0;
-
-//Take Saved Config
-//var savedTested = JSON.parse(localStorage.getItem('tested'));
-
-
-var gameInfo = getLocalStorage();
+let selectedBtn = "square";// Auxiliar
+var gameInfo = getLocalStorage();// All local storage saved
 
 
 

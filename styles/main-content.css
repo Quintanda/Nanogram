@@ -1,0 +1,103 @@
+.container {
+	width: 95vh;
+	height: 95vh;
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 16vw;
+}
+
+.initialize {
+	display: none;
+}
+
+/* Lifes */
+#separation {
+	width: 20%;
+	height: 20%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.content {
+	width: 80%;
+	height: 80%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* Numbers */
+.numbers-up, .numbers-left {
+	display: flex;
+	color: #E2E2E2;
+}
+
+.numbers-selected {
+	color: rgb(226,226,226, 0.3);
+}
+
+.numbers-up {
+	justify-content: space-around;
+	width: 80%;
+	height: 19.5%;
+}
+
+.numbers-left {
+	margin-right: 0.5%;
+	justify-content: space-around;
+	flex-direction: column;
+	width: 19.5%;
+	height: 80%;
+}
+
+.numbers-square {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #182C3C;
+}
+
+#numbers-square-up{
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	border-radius: 5px;	
+	padding-bottom: 3px;
+}
+
+#numbers-square-left {
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	border-radius: 5px;
+	padding-right: 2px;
+}
+
+/* Main Squares */
+.square {
+	border: 1px solid rgb(4, 32, 51, 0.5);
+	background-color: #E2E2E2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.right-square {
+	background-color: #142633;
+    border: none;
+}
+
+.wrong-square {
+    animation: wrongSquare 1.5s ease 0s 1 normal forwards !important;
+    border: none;
+}
+
+.square:hover {
+	cursor: pointer;
+}
+
+.square img {
+	width: 60%;
+	height: 60%;
+}
+
