@@ -1,111 +1,106 @@
 //Squares
-const content = document.getElementById('content');
+//const content = document.getElementById('content');
 
 //Auxiliar
 let selectedBtn = "square";
 
-var difficult = 0;
+//var difficult = 0;
 
 //Take Saved Config
-var savedTested = JSON.parse(localStorage.getItem('tested'));
+//var savedTested = JSON.parse(localStorage.getItem('tested'));
 
 
 var gameInfo = getLocalStorage();
 
 
 
-// Document starts !!!!
+// When document is started
 document.addEventListener("DOMContentLoaded", (event) => {
 
-
-    // Load game
-    loadGame()
-
-    
-    
-    // Wait all the load to show the main content
-    document.getElementById('main').classList.remove('initialize');
+    loadGame();// Load all functions to load game   
+    document.getElementById('main').classList.remove('initialize');// Wait all the load to show the main content
 
 });
 
 
-//Square click event
+// When Square is clicked
 function squareEvent(squareElement) { 
-    // Run set tested
-    setTested(squareElement.getAttribute('index'))
-
-    let allTrue = gameInfo.tested.every(value => value === "true");
-    // If lifes is 0
-    if (gameInfo.lifes == 0) { lostGame('in');}
-    // If all squares is tested 
-    else if(allTrue){ winGame('in')} 
     
+    setTested(squareElement.getAttribute('index'));// Set clicked square to tested and change style
 
-    //Test Update Numbers
-    updateNumbers(squareElement);
-    autoComplete(squareElement);
-    saveLocalStorage();
+    let allTrue = gameInfo.tested.every(value => value === "true");// Return true if is all squares tested
+    if (gameInfo.lifes == 0) { lostGame('in');}// If lifes is 0
+    else if(allTrue){ winGame('in')}// If all squares is tested
+    
+    updateNumbers(squareElement);// Try to update numbers style
+    autoComplete(squareElement);// Try to auto complete x's
+    saveLocalStorage();// Save gameInfo at local storage
 }
 
-//Switch button !!!!
+// When switch button is clicked
 function switchButton(button) {
     
-    playAudio('block');
+    playAudio('block'); // Play audio
 
-    //Update variable
-    selectedBtn = button;
+    
+    selectedBtn = button; //Update auxiliar variable
 
-    //If square clicked
+    // If square is clicked
     if (button == "square"){
 
-        //Add square selection
+        // Change the square style to selected
         changeStyle(document.getElementById('button-square'), "selected");
         document.getElementById('button-square').children[0].src = 'img/square.png';
 
-        //Remove X selection
+        // Change the x style to not selected
         changeStyle(document.getElementById("button-x"), "selected", true)
         document.getElementById('button-x').children[0].src = 'img/no-x.png';
 
     }
 
-    //If X clicked
+    // If X is clicked
     else{
 
-        //Add x selection
+        // Change the X style to selected
         changeStyle(document.getElementById('button-x'), "selected");
         document.getElementById('button-x').children[0].src = 'img/x.png';
 
-        //Remove square selection
+        // Change the X style to not selected
         changeStyle(document.getElementById("button-square"), "selected", true);
         document.getElementById('button-square').children[0].src = 'img/no-square.png';
 
     }
 }
 
+// When restart button is clicked
 async function tryAgain() {
-    playAudio('block')
-    restoreGameInfo(false, false, true, false, true, false, true, true);
+
+    playAudio('block')// play audio
+    restoreGameInfo(false, false, true, false, true, false, true, true); // Restore lifes, tested, numbersUp, numbersLeft
     
-    // Wait 150 ms
+    // Wait 150ms
     await wait(150);
     location.reload();
 }
 
+// When skip button is clicked
 async function skipLevel() {
-    playAudio('block')
-    restoreGameInfo(true, false, true, true, true, true, true, true);
+
+    playAudio('block')// play audio
+    restoreGameInfo(true, false, true, true, true, true, true, true);// Restore newGame, lifes, sorx, tested, x, numbersLeft, numbersUp
     
     // Wait 150 ms
     await wait(150);
     location.reload();
 }
 
-//Set the level !!!!
+// When normal/hard button is clicked
 async function setLevel(level, levelNumber) {
-    playAudio('block')
-    setGameInfo('level', level);
-    setGameInfo('levelNumber', levelNumber);
-    restoreGameInfo(true, false, true, true, true, true, true, true)
+
+    playAudio('block')// play audio
+    setGameInfo('level', level);// Change gameInfo.level
+    setGameInfo('levelNumber', levelNumber);// Change gameInfo.levelNumber
+    restoreGameInfo(true, false, true, true, true, true, true, true)// Restore newGame, lifes, sorx, tested, x, numbersLeft, numbersUp
     
     // Wait 150 ms
     await wait(150);
@@ -113,14 +108,14 @@ async function setLevel(level, levelNumber) {
 }
 
 
-
+// Used to play the sounds
 function playAudio(name){
     let audio = document.getElementById(name);
     audio.currentTime = 0;
     audio.play();
-
 }
 
+// Used to wait
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
