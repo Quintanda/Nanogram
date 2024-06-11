@@ -1,0 +1,27 @@
+/* Headers Container */
+.numbers-square-up-easy, .numbers-square-left-easy {
+	font-size: 0.85em;
+}
+
+.numbers-square-up-easy {
+	height: 100%;
+	width: 9%;
+}
+
+.numbers-square-left-easy {
+	width: 100%;
+	height: 9%;
+}
+
+
+/* Headers Squares */
+.numbers-square span {
+	margin: 1px;
+}
+
+/* Content squares */
+
+.square-easy {
+	width: 10%;
+	height: 10%;
+}

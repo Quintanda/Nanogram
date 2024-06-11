@@ -1,0 +1,31 @@
+/* Up/Left Squares */
+.numbers-square-up-hard, .numbers-square-left-hard {
+	font-size: 0.65em;
+}
+
+.numbers-square-up-hard {
+	height: 100%;
+	width: 6%;
+}
+
+.numbers-square-left-hard {
+	width: 100%;
+	height: 6%;
+}
+
+
+/* Up/Left Span */
+.numbers-square-up-hard span {
+	margin: 0.5px;
+}
+
+.numbers-square-up-hard span {
+	margin: 1px;
+}
+
+/* Squares */
+
+.square-hard {
+	width: 6.666667%;
+	height: 6.666667%;
+}

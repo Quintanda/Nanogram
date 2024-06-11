@@ -1,0 +1,41 @@
+@keyframes alertAnim {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -70%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@keyframes textAnimHover {
+
+	from {padding-left: 0.5em}
+  	to {padding-left: 2em}
+}
+
+@keyframes textAnimHoverOut {
+
+	from {padding-left: 2em}
+  	to {padding-left: 0.5em}
+}
+
+@keyframes textAnimAlert {
+
+	from {font-size: 1.5em}
+  	to {font-size: 2em}
+}
+
+@keyframes textAnimAlertOut {
+
+	from {font-size: 2em}
+  	to {font-size: 1.5em}
+}
+
+@keyframes wrongSquare {
+
+	from {background-color: red}
+  	to {background-color: #182C3C}
+}

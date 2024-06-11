@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset='utf-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" type="text/css" href="easy-style.css">
+		<link rel="stylesheet" type="text/css" href="hard-style.css">
+		<link rel="stylesheet" type="text/css" href="animation.css">
+	</head>
+	<body>
+		<header class="side-bar endGame-opacity" id="header">
+			<div id="divh1"><h1>Nanogram.</h1></div>
+			<div id="header-container">
+				<div class="select-level">
+					<p class="header-title">SELECT LEVEL</p>
+					<button class="header-btn" onclick="setLevel('easy', 10)">Normal</button>
+					<button class="header-btn" onclick="setLevel('hard', 15)">Hard</button>
+				</div>
+				<div class="restart-skip">
+					<p class="header-title">OPTIONS</p>
+					<button class="header-btn" onclick="tryAgain()">Restart</button>
+					<button class="header-btn" onclick="skipLevel()">Skip</button>
+				</div>
+			</div>
+		</header>
+
+		<div class="alert" id="alert">
+			<h2>You<span style="margin-left:0.5em;">Lose!</span></h2>
+			<div class="alert-btn-div">
+				<button class="alert-btn" onclick="tryAgain()">Restart</button>
+				<button class="alert-btn" onclick="skipLevel()">Skip</button>
+			</div>
+		</div>
+
+		<div class="alert" id="win">
+			<h2>You<span style="margin-left:0.5em;">Win!</span></h2>
+			<div class="alert-btn-div">
+				<button class="alert-btn" onclick="tryAgain()">Restart</button>
+				<button class="alert-btn" onclick="skipLevel()">Skip</button>
+			</div>
+		</div>
+
+		<main class="endGame-opacity initialize" id="main">
+			<div class="container">
+				<div id="separation">
+					<div class="heart"><img src="img/no-heart.png" id="life1" width="38"/></div>
+					<div class="heart"><img src="img/no-heart.png" id="life2" width="38"/></div>
+					<div class="heart"><img src="img/no-heart.png" id="life3" width="38"/></div>
+					<div class="heart"><img src="img/no-heart.png" id="life4" width="38"/></div>
+				</div>
+
+				<!-- Up Header -->
+				<div class="numbers-up" id="numbers-up">
+					<div class="numbers-square" id="numbers-square-up"></div>
+				</div>
+
+				<!-- Left Header -->
+				<div class="numbers-left" id="numbers-left">
+					<div class="numbers-square" id="numbers-square-left"></div>
+				</div>
+
+				<!-- Squares -->
+				<div class="content" id="content">				
+						<div class="square" id="square" onclick="squareEvent(this);"></div>
+				</div>
+			</div>
+
+			<!-- Switch Buttons -->
+			<div class="switch">
+				<div class="switch-button" id="button-x" onclick="switchButton('x')"><img src="img/no-x.png"/></div>
+				<div class="switch-button selected" id="button-square" onclick="switchButton('square')"><img src="img/square.png"/></div>
+			</div>
+
+		</main>
+
+		
+		<audio id="block" src="audio/block.wav"></audio>
+		<audio id="auto-complete" src="audio/auto-complete.wav"></audio>
+		<audio id="wrong" src="audio/wrong.wav"></audio>
+		<script src="scripts/generatin.js"></script>
+		<script src="scripts/general.js"></script>
+		<script src="scripts/query.js"></script>
+		<script src="scripts/main.js"></script>
+	</body>
+</html>
