@@ -326,3 +326,8 @@ img {
 	pointer-events: none;
 }
 
+
+.blue-square {
+	background-color: #182C3C;
+	border: none;
+}

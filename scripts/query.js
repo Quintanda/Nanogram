@@ -1,21 +1,19 @@
-// Save game info in local storage
+// Save gameInfo at local storage
 function saveLocalStorage() {
 	localStorage.setItem('gameInfo', JSON.stringify(gameInfo));
 }
 
-// Get saved game info in local storage
+// Get saved gameInfo at local storage
 function getLocalStorage() {
 
-	// If game info is saved
+	// If gameInfo is saved
 	if (localStorage.getItem('gameInfo')) {
-		//Parse string into object
-		gameInfo = JSON.parse(localStorage.getItem('gameInfo'));
-
+		gameInfo = JSON.parse(localStorage.getItem('gameInfo'));//Parse string into object
 		return gameInfo;
 	}
 	// If game info is not saved 
 	else {
-		return {
+		return {// Default gameInfo
 				new: true,
     			level: 'easy',
     			levelNumber: 10,
@@ -29,12 +27,13 @@ function getLocalStorage() {
 	}
 }
 
-// Add info into game info and save
+// Add into gameInfo and save at local storage
 function setGameInfo(name, info){
 	gameInfo[name] = info;
 	saveLocalStorage();
 }
 
+// Remove something from gameInfo
 function restoreGameInfo(newGame, level, lifes, sorx, tested, x, numbersLeft, numbersUp){
 
 	if (newGame){
@@ -70,54 +69,46 @@ function restoreGameInfo(newGame, level, lifes, sorx, tested, x, numbersLeft, nu
 		gameInfo.numbersUp = [];
 	}
 	
-	saveLocalStorage();
+	saveLocalStorage(); // Save at local storage
 }
 
-
-//-----------------------------------//
-
-
+// Create, append and set span text
 function createSpan(parent, text){
-	//Create Span
 	let spanElement = document.createElement('span');
-	spanElement.textContent = text; 
+	spanElement.textContent = text;
 	parent.appendChild(spanElement);
 }
 
+// Change an element style or remove it
 function changeStyle(element, style, remove){
-	
 	if (remove){
-		element.classList.remove(style)
+		element.classList.remove(style);
 	}
 	else {
-		element.classList.add(style)
+		element.classList.add(style);
 	}
-	
-
 }
 
+// Create an image with src or set an <img> src
 function changeImage(element, source){
     
 
     if (element.tagName == "IMG"){
-    	element.src = source
+    	element.src = source;
     }
     else {
     	let img = document.createElement("img");
-		img.src = source
+		img.src = source;
     	element.appendChild(img);
-    }
-    
+    }  
 }
 
+// Set main squares index and tested
 function setIndexTested(){
-
-	let square = document.querySelectorAll('div.square');
+	let square = document.querySelectorAll('div.square');// All main squares
+	
 	for (let i = 0; i < gameInfo.levelNumber**2; i++){
-
-		square[i].setAttribute('index', i)
-
-		//Set all squares to tested false
+		square[i].setAttribute('index', i);
         if (gameInfo.tested[i] != "true") gameInfo.tested[i] = "false"
 		
 	}

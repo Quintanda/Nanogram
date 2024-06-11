@@ -1,12 +1,11 @@
-//Clone Squares !!!!
+// Clone main squares and the numbers squares
 function createSquare(){
 
-		//Select existing up, left and main squares
-		let numbersUp = document.getElementById('numbers-up');
-		let numbersLeft = document.getElementById('numbers-left');
-		let squaresUp = document.getElementById('numbers-square-up');
-		let squaresLeft = document.getElementById('numbers-square-left');
-		let square = document.getElementById('square')
+		let numbersUp = document.getElementById('numbers-up');// Number up container
+		let numbersLeft = document.getElementById('numbers-left');// Number left container
+		let squaresUp = document.getElementById('numbers-square-up');// Square number up within container
+		let squaresLeft = document.getElementById('numbers-square-left');// Square number left within container
+		let square = document.getElementById('square')// Main square
 
 		for (var i = 0; i < gameInfo.levelNumber-1; i++){
 
@@ -21,220 +20,173 @@ function createSquare(){
 	    }
 
 	    for (var i = 0; i < gameInfo.levelNumber**2-1; i++){
-	    		//Clone Squares
+	    		
+	    		//Clone the main quares
 	            clone = square.cloneNode(true);
 	            content.appendChild(clone);
 
 	    }
 }
 
-//Set Style !!!!
+//Set Style
 function setStyle(){
 
-	//Select All Up/Left/Squares
-	let squareUp = document.querySelectorAll('[id="numbers-square-up"]');
-	let squareLeft = document.querySelectorAll('[id="numbers-square-left"]');
-	let square = document.querySelectorAll('div.square');
+	let squareUp = document.querySelectorAll('[id="numbers-square-up"]');// All up numbers squares within container
+	let squareLeft = document.querySelectorAll('[id="numbers-square-left"]');// All left numbers squares within container
+	let square = document.querySelectorAll('div.square');// All main squares
 
 	squareUp.forEach(function(element) {
-		//Set Up Squares Style
-    	element.classList.add("numbers-square-up-"+gameInfo.level);
+    	element.classList.add("numbers-square-up-"+gameInfo.level);//Set numbers up squares style by the level
 	});
 
 	squareLeft.forEach(function(element) {
-		//Set Left Squares Style
-    	element.classList.add("numbers-square-left-"+gameInfo.level);
+    	element.classList.add("numbers-square-left-"+gameInfo.level);//Set numbers left squares style by the level
 	});
 
 	square.forEach(function(element) {
-		//Set Squares Style
-    	element.classList.add("square-"+gameInfo.level);
+    	element.classList.add("square-"+gameInfo.level);//Set main squares style by the level
 	});
-	
 
-	setBorder();
+	setBorder();// Set the outside and x/y axis border
 }
 
-// Set Border !!!!
+// Set outside and x/y axis border 
 function setBorder(){
 
-	let w = gameInfo.levelNumber;
+	let n = gameInfo.levelNumber;// Current level number
 
-	//Select All Squares
-    let square = document.querySelectorAll('div.square');
+    let square = document.querySelectorAll('div.square');// All main squares
 
     //Outside Border
-    for (var i = 0; i < w; i++){
+    for (var i = 0; i < n; i++){
         square[i].style.borderTop = "2px solid #182C3C";
-        square[i*w+w-1].style.borderRight = "2px solid #182C3C";
-        square[w*w-i-1].style.borderBottom = "2px solid #182C3C";
-        square[i*w].style.borderLeft = "2px solid #182C3C";
+        square[i*n+n-1].style.borderRight = "2px solid #182C3C";
+        square[n*n-i-1].style.borderBottom = "2px solid #182C3C";
+        square[i*n].style.borderLeft = "2px solid #182C3C";
     }
 
     //Inside Border
-    for (var i = 5; i < w*w; i+=5){
+    for (var i = 5; i < n*n; i+=5){
     	//Y axis
     	square[i].style.borderLeft = "2px solid #182C3C";
     }
-    for (var i = 1; i != w/5; i++){
+    for (var i = 1; i != n/5; i++){
     	//X axis
-    	for (var a = 0; a < w; a++){
-    		square[i*5*w+a].style.borderTop = "2px solid #182C3C";
+    	for (var a = 0; a < n; a++){
+    		square[i*5*n+a].style.borderTop = "2px solid #182C3C";
     	}
     }
-    //Radius Border
-    square[0].style.borderTopLeftRadius = "5px"
-    square[w-1].style.borderTopRightRadius = "5px"
-    square[w*w-w].style.borderBottomLeftRadius = "5px"
-    square[w*w-1].style.borderBottomRightRadius = "5px"
-}
-//--------------------------------------------------------------
 
-//Configure Level !!!!
+    //Radius Border
+    square[0].style.borderTopLeftRadius = "5px";
+    square[n-1].style.borderTopRightRadius = "5px";
+    square[n*n-n].style.borderBottomLeftRadius = "5px";
+    square[n*n-1].style.borderBottomRightRadius = "5px";
+}
+
+//Create a new squares or x's positions
 function createConfig() {
 
-	// Where will be saved the config
-    let sorx = [];
+    let sorx = [];// Square or X
 
     for (let i = 0; i < gameInfo.levelNumber**2; i++){
 
-        // Generate a random number
-        let randomNumber = Math.random();
-
-        // Set random square and x
-        sorx[i] = (randomNumber > 0.5) ? 'square' : 'x';
-
-        //Set all squares to tested false
-        gameInfo.tested[i] = "false";
+        let randomNumber = Math.random();// Generate a random number
+        sorx[i] = (randomNumber > 0.5) ? 'square' : 'x';// Set square or x by the random number
+        gameInfo.tested[i] = "false";// Set gameInfo.tested to "false"
     }
-    //Save Config Level
-   	setGameInfo('sorx', sorx)
-   	setGameInfo('new', false)
+
+   	setGameInfo('sorx', sorx); // Set gameInfo.sorx to sorx and save it at local storage
+   	setGameInfo('new', false); // Set gameInfo.new to false and save it at local storage
 }
 
-//Set config !!!!
-function setConfig() {
-
-	//Select All Squares
-    let square = document.querySelectorAll('div.square');
-
-    for (let i = 0; i < gameInfo.sorx.length; i++){
-
-    	//Set Current Square Equal Saved Square
-    	square[i].setAttribute("sorx", gameInfo.sorx[i]);
-    	//square[i].textContent = gameInfo.sorx[i];//TEST TEST TEST TEST
-    }
-}
-
-//Get saved tested !!!!
+// Get saved gameInfo.tested
 function getTested() {
 
-    // If tested is saved
+    // If gameInfo.tested is saved
 	if(gameInfo.tested != ""){
 
-		// Select all squares
-    	let square = document.querySelectorAll('div.square');
+    	let square = document.querySelectorAll('div.square');// All main squares
 
+    	// Repeat for all main squares
 		for(let i = 0; i < gameInfo.levelNumber**2; i++){
 				
-			// If is square
+			// If square and tested true
 			if(gameInfo.tested[i] == "true" && gameInfo.sorx[i] == "square"){
 
-				//Change Style
-	            square[i].style.backgroundColor = "#182C3C";
-	            square[i].style.border = "none";
+	            changeStyle(square[i], "blue-square")// Change square to blue style
 
-	            //Set Tested = True
-	            square[i].setAttribute("tested", "true");
 			}
-			// If is X
+			// If x, tested true, and there's no image
 			else if(gameInfo.tested[i] == "true" && gameInfo.sorx[i] == "x" && square[i].childElementCount == 0){
-				//Set X src
-	            let xIcon = document.createElement("img");
-	            xIcon.src="img/x.png"
 
-	            //Change Style
-	            square[i].appendChild(xIcon);
-
-	            //Set Tested = True
-	            square[i].setAttribute("tested", "true");
+	            changeImage(square[i], "img/x.png");// Append x.png to square
 
 			}
 		}
 	}
 }
 
-//Set Numbers !!!!
+// Set rows and column numbers
 function setNumbers (){
 
-	//Select All Up/Left
-    let squareUp = document.querySelectorAll('[id="numbers-square-up"]');
-    let squareLeft = document.querySelectorAll('[id="numbers-square-left"]');
+    let squareUp = document.querySelectorAll('[id="numbers-square-up"]');// All up numbers squares
+    let squareLeft = document.querySelectorAll('[id="numbers-square-left"]');// All left numbers squares
 
 	for (let i = 0; i < gameInfo.levelNumber; i++){
 
-		let trueSquaresUp = 0; // True Y axis squares
-		let trueSquaresLeft = 0; // True X axis squares
+		let trueSquaresUp = 0; // True column squares count
+		let trueSquaresLeft = 0; // True row squares count
 
 		for (let a = 0; a < gameInfo.levelNumber; a++){
 
-			// If true in Y axis
+			// If true in column
 			if (gameInfo.sorx[a*gameInfo.levelNumber+i] == "square") {
 				
-				// Increase Y axis squares
-				trueSquaresUp++
+				trueSquaresUp++// Increase column squares count
 
-				//If is the last square in Y axis
+				//If is the column last square
 				if (a == gameInfo.levelNumber-1){
 				
-					// Create span
-					createSpan(squareUp[i], trueSquaresUp);
-
-					trueSquaresUp = 0;
+					createSpan(squareUp[i], trueSquaresUp); // Create and append span in the up number square
+					trueSquaresUp = 0;// Reset true column squares count
 				}
 
 			}
-			// If false in Y axis
+			// If false in column
 			else {
 				
-				// If True Y axis squares > 0
+				// If true column squares count > 0
 				if (trueSquaresUp > 0){
 
-					// Create span
-					createSpan(squareUp[i], trueSquaresUp);
-
-					trueSquaresUp = 0;
+					createSpan(squareUp[i], trueSquaresUp);// Create and append span in the up number square
+					trueSquaresUp = 0;// Reset true column squares count
 				}
 			}
 
-			// If true in X axis
+			// If true in row
 			if (gameInfo.sorx[a+gameInfo.levelNumber*i] == "square"){
 				
-				// Increase X axis squares
-				trueSquaresLeft++
+				trueSquaresLeft++// Increase true row squares count
 
-				//If is the last square in X axis
+				//If is the row last square
 				if (a == gameInfo.levelNumber-1){
 
-
 					// Create span
-					createSpan(squareLeft[i], trueSquaresLeft);
-
-					trueSquaresLeft = 0;
+					createSpan(squareLeft[i], trueSquaresLeft);// Create and append span in the left number square
+					trueSquaresLeft = 0;// Reset true column squares count
 				}
 
 			}
 
-			// If false in X axis
+			// If false in row
 			else {
 				
-				// If True X axis squares > 0
+				// If true row squares count > 0
 				if (trueSquaresLeft > 0){
 
-					//Create span
-					createSpan(squareLeft[i], trueSquaresLeft);
-
-					trueSquaresLeft = 0;
+					createSpan(squareLeft[i], trueSquaresLeft);// Create and append span in the left number square
+					trueSquaresLeft = 0;// Reset true column squares count
 				}
 
 			}
@@ -243,22 +195,22 @@ function setNumbers (){
 	}
 }
 
-//Lost Game !!!!
+// Show and hide lost game alert
 function lostGame(inout) {
 
-	// If inout = in
+	// If gameInfo.life is 0
 	if (inout == "in"){
 
-		//Add Lost Class
+		// Add alert animation class to lost game alert
 		changeStyle(document.getElementById('alert'), "alert-anim");
 		changeStyle(document.getElementById('header'), "body-lost-game");
 		changeStyle(document.getElementById('main'), "body-lost-game");
     }
 
-    // If inout == out
+    // If clicked on any lost game alert button
     else if(inout == "out"){
 
-    	//Remove Lost Class
+    	// Remove alert animation class from lost game alert
     	changeStyle(document.getElementById('alert'), "alert-anim", true);
 		changeStyle(document.getElementById('header'), "body-lost-game", true);
 		changeStyle(document.getElementById('main'), "body-lost-game", true);
@@ -268,10 +220,10 @@ function lostGame(inout) {
 //Win Game !!!!
 function winGame(inout) {
 
-	// If inout = in
+	// If gameInfo.tested is all true
 	if (inout == "in"){
 
-		//Add Lost Class
+		// Add alert animation class to win game alert
 		changeStyle(document.getElementById('win'), "alert-anim");
 		changeStyle(document.getElementById('header'), "body-lost-game");
 		changeStyle(document.getElementById('main'), "body-lost-game");
@@ -280,20 +232,20 @@ function winGame(inout) {
     // If inout == out
     else if(inout == "out"){
 
-    	//Remove Lost Class
+    	// Remove alert animation class from lost game alert
     	changeStyle(document.getElementById('win'), "alert-anim", true);
 		changeStyle(document.getElementById('header'), "body-lost-game", true);
 		changeStyle(document.getElementById('main'), "body-lost-game", true);
     }
 }
 
-// Update numbers color !!!!
+// Set numbers color by clicked square
 function updateNumbers(thisSquare){
 
-	square = document.querySelectorAll('div.square')
-	let thisSquareIndex = parseInt(thisSquare.getAttribute('index'));
-	let indexRow = Math.floor(thisSquareIndex / gameInfo.levelNumber)
-	let indexColunm = thisSquareIndex % gameInfo.levelNumber
+	square = document.querySelectorAll('div.square')// All main squares
+	let thisSquareIndex = parseInt(thisSquare.getAttribute('index'));// Index of thisSquare
+	let indexRow = Math.floor(thisSquareIndex / gameInfo.levelNumber)// Respective row
+	let indexColunm = thisSquareIndex % gameInfo.levelNumber// Respective column
 	
 	// Count how much squares is tested in the row sequence
 	function rowSequence(index){	
@@ -383,6 +335,7 @@ function updateNumbers(thisSquare){
 		return [countUp, countDown, xIndexUp, xIndexDown];
 	} 
 	
+	// Get the position of the respective thisSquare sequence 
 	function sequencePosition(index){
 
 		let positionRow = -1;
@@ -412,6 +365,7 @@ function updateNumbers(thisSquare){
 		return [positionRow, positionColunm];
 	}
 
+	// Color the respective number of the column and row
 	function colorNumber(sorx){
 
 		let sequenceRow = rowSequence(thisSquareIndex);
@@ -533,13 +487,10 @@ function updateNumbers(thisSquare){
 					}
 				}
 		}
-	}
-
-	
-	colorNumber(gameInfo.sorx[thisSquareIndex])
+	} colorNumber(gameInfo.sorx[thisSquareIndex])// Color the respective number of the column and row
 }
 
-// Set saved updated numbers
+// Set colored numbers by gameInfo.numbersLeft and gameInfo.numbersUp
 function setUpdatedNumbers(){
 
 	if (gameInfo.numbersLeft != ""){
@@ -556,6 +507,7 @@ function setUpdatedNumbers(){
 	}
 }
 
+// Create and set new initial x's positions
 function getInitialX(){
 
 	for (let i = 0; i < gameInfo.levelNumber; i++){
@@ -563,45 +515,36 @@ function getInitialX(){
 			let randomNumber = Math.floor(Math.random() * gameInfo.levelNumber**2-1)
 			if (gameInfo.sorx[randomNumber] == 'x' && gameInfo.tested[randomNumber] != "true"){
 
-				gameInfo.x[randomNumber] = 'true';
+				gameInfo.x[randomNumber] = 'true';// Save the x position at the gameInfo.x 
 				break;
 			}
 		}
 	}
-	setInitialX();
+	setInitialX();// Set the saved initial x's positions
 }
 
+// Set the saved initial x's positions
 function setInitialX(){
 	for (i = 0; i < gameInfo.levelNumber**2; i++){
 	
-	// Select all squares
-    let square = document.querySelectorAll('div.square');
+    let square = document.querySelectorAll('div.square');// All squares
 		
 		if (gameInfo.x[i] == "true" && square[i].childElementCount == 0){
 
-
-			//Set X src
-	        let xIcon = document.createElement("img");
-	        xIcon.src="img/x.png"
-
-	        //Change Style
-	        square[i].appendChild(xIcon);
-
-	        //Set Tested = True
-	        square[i].setAttribute("tested", "true");
-	        gameInfo.tested[i] = "true";
+	        changeImage(square[i], "img/x.png");// Append x.png to square
+	        gameInfo.tested[i] = "true";// Set gameInfo.tested to tested
 		}	
 	}
-	saveLocalStorage();
+	saveLocalStorage(); // Save gameInfo at local storage
 }
 
+// Auto complete the x's when the all the row and column squares is filled
 function autoComplete(thisSquare){
 
-	let square = document.querySelectorAll('div.square')
-	let thisSquareIndex = parseInt(thisSquare.getAttribute('index'));
-	let indexRow = Math.floor(thisSquareIndex / gameInfo.levelNumber)
-	let indexColunm = thisSquareIndex % gameInfo.levelNumber
-	let audioPlays;
+	let square = document.querySelectorAll('div.square')// All main squares
+	let thisSquareIndex = parseInt(thisSquare.getAttribute('index'));// thisSquare index
+	let indexRow = Math.floor(thisSquareIndex / gameInfo.levelNumber)// thisSquare row
+	let indexColunm = thisSquareIndex % gameInfo.levelNumber// thisSquare column
 
 	// Row
 	let a = true;
@@ -620,7 +563,8 @@ function autoComplete(thisSquare){
 			}
 		}	
 	}
-	// Row
+
+	// Column
 	a = true;
 	for (let i = indexColunm; i < gameInfo.levelNumber**2; i += gameInfo.levelNumber){
 
@@ -640,7 +584,7 @@ function autoComplete(thisSquare){
 		}	
 	}
 	
-	getTested();
-	setUpdatedNumbers();
-	saveLocalStorage();
+	getTested(); // Set x's images
+	setUpdatedNumbers(); // Color the up and left numbers
+	saveLocalStorage(); // Save gameInfo at local storage
 }
