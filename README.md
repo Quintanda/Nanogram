@@ -49,10 +49,10 @@ Once you have the game open in your browser, you can start playing immediately. 
 <img src="img/grid.png" alt="Grid Area Image" width="200"/>
 
 2. **Number Hints:** These are the numbers on the top and left sides of the grid. They tell you how many cells in that row or column should be filled.
-<img src="img/number-hint.png" alt="Grid Area Image" width="100"/>
+<img src="img/number-hint.png" alt="Number Hint" width="100"/>
 
 3. **Switch Buttons:** Use these to switch between square and X marker.
-<img src="img/switch-button.png" alt="Grid Area Image" height="100"/>
+<img src="img/switch-button.png" alt="Switch Button" height="100"/>
 
 ## How to Play
 
