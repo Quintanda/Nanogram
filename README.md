@@ -19,7 +19,7 @@ Welcome to my Nonogram game! Nonograms are logic puzzles in which cells in a gri
 - Two levels options.
 - Infinite random fases.
 
-## Instalation
+## Installation
 
 To get a local copy up and running, follow these simple steps:
 
