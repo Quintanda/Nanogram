@@ -83,7 +83,7 @@ function updateNumbers(thisSquare){
     square = document.querySelectorAll('div.square')// All main squares
     let thisSquareIndex = parseInt(thisSquare.getAttribute('index'));// Index of thisSquare
     let indexRow = Math.floor(thisSquareIndex / gameInfo.levelNumber)// Respective row
-    let indexColunm = thisSquareIndex % gameInfo.levelNumber// Respective column
+    let indexColumn = thisSquareIndex % gameInfo.levelNumber// Respective column
     
     // Count how much squares is tested in the row sequence
     function rowSequence(index){    
@@ -129,8 +129,8 @@ function updateNumbers(thisSquare){
         return [countLeft, countRight, xIndexLeft, xIndexRight];
     }
 
-    // Count how much squares is tested in the colunm sequence
-    function colunmSequence(index){
+    // Count how much squares is tested in the column sequence
+    function columnSequence(index){
         let countUp = 0;
         let countDown = 0;
         let xIndexUp;
@@ -153,7 +153,7 @@ function updateNumbers(thisSquare){
             }
         }
 
-        for (let i = index + gameInfo.levelNumber; i <= indexColunm+gameInfo.levelNumber**2-gameInfo.levelNumber; i+=gameInfo.levelNumber){
+        for (let i = index + gameInfo.levelNumber; i <= indexColumn+gameInfo.levelNumber**2-gameInfo.levelNumber; i+=gameInfo.levelNumber){
             
             if(gameInfo.sorx[i] == "square"){
 
@@ -177,7 +177,7 @@ function updateNumbers(thisSquare){
     function sequencePosition(index){
 
         let positionRow = -1;
-        let positionColunm = -1;
+        let positionColumn = -1;
         let a;
         for (let i = indexRow*gameInfo.levelNumber; i <= index; i++){
 
@@ -190,24 +190,24 @@ function updateNumbers(thisSquare){
         } if (a) positionRow++
 
         a = false;
-        for (let i = indexColunm; i <= index; i+=gameInfo.levelNumber){
+        for (let i = indexColumn; i <= index; i+=gameInfo.levelNumber){
 
             if (gameInfo.sorx[i] == "square"){
                 a = true;
             }
             else if(a){
-                positionColunm++; a = false;
+                positionColumn++; a = false;
             }
-        } if (a) positionColunm++
+        } if (a) positionColumn++
 
-        return [positionRow, positionColunm];
+        return [positionRow, positionColumn];
     }
 
     // Color the respective number of the column and row
     function colorNumber(sorx){
 
         let sequenceRow = rowSequence(thisSquareIndex);
-        let sequenceColunm = colunmSequence(thisSquareIndex);
+        let sequenceColumn = columnSequence(thisSquareIndex);
         let positionSequence = sequencePosition(thisSquareIndex);
 
         // For the square
@@ -238,25 +238,25 @@ function updateNumbers(thisSquare){
 
             }
 
-            // For the colunm
-            spanNumber = document.getElementById('numbers-up').children[indexColunm].children[positionSequence[1]];
+            // For the column
+            spanNumber = document.getElementById('numbers-up').children[indexColumn].children[positionSequence[1]];
 
-            if (sequenceColunm[0] + sequenceColunm[1] + 1 == parseInt(spanNumber.textContent)){
+            if (sequenceColumn[0] + sequenceColumn[1] + 1 == parseInt(spanNumber.textContent)){
 
-                if(gameInfo.tested[sequenceColunm[2]] == "true" && gameInfo.tested[sequenceColunm[3]] == "true"){
+                if(gameInfo.tested[sequenceColumn[2]] == "true" && gameInfo.tested[sequenceColumn[3]] == "true"){
                     
                     changeStyle(spanNumber, 'numbers-selected');
 
                     // Save span
-                    gameInfo.numbersUp.push(indexColunm, positionSequence[1]);
+                    gameInfo.numbersUp.push(indexColumn, positionSequence[1]);
                     saveLocalStorage();
                 }
-                else if (gameInfo.tested[sequenceColunm[2]] == undefined || gameInfo.tested[sequenceColunm[3]] == undefined){
+                else if (gameInfo.tested[sequenceColumn[2]] == undefined || gameInfo.tested[sequenceColumn[3]] == undefined){
 
                     changeStyle(spanNumber, 'numbers-selected');
 
                     // Save span
-                    gameInfo.numbersUp.push(indexColunm, positionSequence[1]);
+                    gameInfo.numbersUp.push(indexColumn, positionSequence[1]);
                     saveLocalStorage();
                 }
 
@@ -296,31 +296,31 @@ function updateNumbers(thisSquare){
                 }
 
                 // To up
-                if (sequenceColunm[0] != 0){
+                if (sequenceColumn[0] != 0){
 
-                    spanNumber = document.getElementById('numbers-up').children[indexColunm].children[positionSequence[1]];
+                    spanNumber = document.getElementById('numbers-up').children[indexColumn].children[positionSequence[1]];
 
-                    if (sequenceColunm[0] == parseInt(spanNumber.textContent) && gameInfo.tested[colunmSequence(thisSquareIndex-gameInfo.levelNumber)[2]] == "true"){
+                    if (sequenceColumn[0] == parseInt(spanNumber.textContent) && gameInfo.tested[columnSequence(thisSquareIndex-gameInfo.levelNumber)[2]] == "true"){
                         
                         changeStyle(spanNumber, 'numbers-selected');
 
                         // Save span
-                        gameInfo.numbersUp.push(indexColunm, positionSequence[1]);
+                        gameInfo.numbersUp.push(indexColumn, positionSequence[1]);
                         saveLocalStorage();
                     }
                 }
 
                 // To down
-                if (sequenceColunm[1] != 0){
+                if (sequenceColumn[1] != 0){
 
-                    spanNumber = document.getElementById('numbers-up').children[indexColunm].children[positionSequence[1]+1];
+                    spanNumber = document.getElementById('numbers-up').children[indexColumn].children[positionSequence[1]+1];
                     
-                    if (sequenceColunm[1] == parseInt(spanNumber.textContent) && gameInfo.tested[colunmSequence(thisSquareIndex+gameInfo.levelNumber)[3]] == "true"){
+                    if (sequenceColumn[1] == parseInt(spanNumber.textContent) && gameInfo.tested[columnSequence(thisSquareIndex+gameInfo.levelNumber)[3]] == "true"){
                         
                         changeStyle(spanNumber, 'numbers-selected');
 
                         // Save span
-                        gameInfo.numbersUp.push(indexColunm, positionSequence[1]+1);
+                        gameInfo.numbersUp.push(indexColumn, positionSequence[1]+1);
                         saveLocalStorage();
                     }
                 }
@@ -334,7 +334,7 @@ function autoComplete(thisSquare){
     let square = document.querySelectorAll('div.square')// All main squares
     let thisSquareIndex = parseInt(thisSquare.getAttribute('index'));// thisSquare index
     let indexRow = Math.floor(thisSquareIndex / gameInfo.levelNumber)// thisSquare row
-    let indexColunm = thisSquareIndex % gameInfo.levelNumber// thisSquare column
+    let indexColumn = thisSquareIndex % gameInfo.levelNumber// thisSquare column
 
     // Row
     let a = true;
@@ -356,7 +356,7 @@ function autoComplete(thisSquare){
 
     // Column
     a = true;
-    for (let i = indexColunm; i < gameInfo.levelNumber**2; i += gameInfo.levelNumber){
+    for (let i = indexColumn; i < gameInfo.levelNumber**2; i += gameInfo.levelNumber){
 
         if (gameInfo.sorx[i] == "square" && gameInfo.tested[i] == "false"){
             
@@ -364,7 +364,7 @@ function autoComplete(thisSquare){
         }
     }
     if (a){
-        for (let i = indexColunm; i < gameInfo.levelNumber**2; i += gameInfo.levelNumber){
+        for (let i = indexColumn; i < gameInfo.levelNumber**2; i += gameInfo.levelNumber){
 
             if (gameInfo.sorx[i] == "x" && gameInfo.tested[i] == "false"){
 
