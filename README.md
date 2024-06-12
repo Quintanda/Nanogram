@@ -6,9 +6,9 @@ Welcome to my Nonogram game! Nonograms are logic puzzles in which cells in a gri
 ## Contents
 
 - [Features](#features)
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Game Rules](#Game-Rules)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Game Rules](#game-rules)
 
 ## Features
 
