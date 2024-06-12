@@ -1,4 +1,4 @@
-[<img src="https://img.shields.io/badge/Portugu%C3%AAs-BR-%23FFDC02?style=flat-square&logo=readme&logoColor=white&logoSize=auto&labelColor=%2319AE47"/>](readme.pt-br.md)
+[<img src="https://img.shields.io/badge/Portugu%C3%AAs-BR-%23FFDC02?style=flat-square&logo=readme&logoColor=white&logoSize=auto&labelColor=%2319AE47"/>](README.pt-br.md)
 # Nanogram Game
 
 Welcome to my Nonogram game! Nonograms are logic puzzles in which cells in a grid must be colored or left blank according to numbers at the side of the grid to reveal a hidden picture. This game is implemented in JavaScript.
