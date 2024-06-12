@@ -1,5 +1,5 @@
 
-[<img src="https://img.shields.io/badge/English-US-%230A3161?style=flat-square&logo=readme&logoColor=white&logoSize=auto&labelColor=%23B31942"/>](readme.md)
+[<img src="https://img.shields.io/badge/English-US-%230A3161?style=flat-square&logo=readme&logoColor=white&logoSize=auto&labelColor=%23B31942"/>](README.md)
 
 # Nanogram Game
 
