@@ -1,6 +1,17 @@
 /* Up/Left Squares */
-.numbers-square-up-hard, .numbers-square-left-hard {
-	font-size: 0.65em;
+@media (max-width: 999px){
+
+	.numbers-square-up-hard, .numbers-square-left-hard {
+		font-size: 0.4em;
+	}
+
+}
+
+@media (min-width: 999.5px){
+	.numbers-square-up-hard, .numbers-square-left-hard {
+		font-size: 0.65em;
+	}
+
 }
 
 .numbers-square-up-hard {

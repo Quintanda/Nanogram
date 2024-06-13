@@ -1,8 +1,18 @@
 /* Headers Container */
-.numbers-square-up-easy, .numbers-square-left-easy {
-	font-size: 0.85em;
+@media (max-width: 999px){
+
+	.numbers-square-up-easy, .numbers-square-left-easy {
+		font-size: 0.58em;
+	}
 }
 
+@media (min-width: 999.5px){
+
+	.numbers-square-up-easy, .numbers-square-left-easy {
+		font-size: 0.85em;
+	}
+
+}
 .numbers-square-up-easy {
 	height: 100%;
 	width: 9%;
